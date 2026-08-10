@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero Trust for a 12-Person Office: What Actually Matters — Memento Journal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0e13;
+      --surface: #10151d;
+      --surface-2: #161c26;
+      --border: #1c232e;
+      --text: #e9edf2;
+      --text-2: #7c8a9c;
+      --text-3: #4d5866;
+      --accent: #e8a355;
+      --accent-2: #58bfae;
+      --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+      --font-body: -apple-system, "Segoe UI", system-ui, Roboto, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.7;
+    }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+    .prose { max-width: 65ch; margin: 0 auto; padding: 0 1.5rem; }
+
+    a { color: var(--accent); }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 0;
+      position: sticky;
+      top: 0;
+      background: rgba(10, 14, 19, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .nav-row { display: flex; justify-content: space-between; align-items: baseline; }
+    .logo {
+      font-family: var(--font-mono); font-weight: 700; font-size: 0.98rem;
+      letter-spacing: -0.01em; text-decoration: none; color: inherit;
+    }
+    .logo .mark { color: var(--accent); }
+    .logo .sep { color: var(--text-3); margin: 0 0.4rem; font-weight: 400; }
+    .logo .site { color: var(--text-2); font-weight: 600; }
+    .back-link { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-2); text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+
+    article { padding: 3rem 0 4rem; }
+
+    .post-meta {
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-2);
+      margin-bottom: 1rem; letter-spacing: 0.02em;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.35rem); font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.25; margin-bottom: 2.2rem;
+    }
+
+    h2 {
+      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em;
+      margin: 2.4rem 0 1rem;
+    }
+
+    p { color: var(--text-2); margin-bottom: 1.3rem; font-size: 1.02rem; }
+    p strong { color: var(--text); font-weight: 600; }
+
+    ol, ul { color: var(--text-2); margin: 0 0 1.3rem 1.3rem; }
+    li { margin-bottom: 0.5rem; }
+    li strong { color: var(--text); }
+
+    figure { margin: 2.2rem 0; }
+    .img-placeholder {
+      aspect-ratio: 16/9; border-radius: 6px; border: 1px dashed var(--border);
+      background:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px),
+        var(--surface);
+      background-size: 20px 20px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-3); font-family: var(--font-mono); font-size: 0.75rem;
+      text-align: center; gap: 0.5rem; flex-direction: column;
+    }
+    figcaption { font-size: 0.82rem; color: var(--text-3); margin-top: 0.7rem; font-family: var(--font-mono); }
+
+    .video-embed {
+      position: relative; aspect-ratio: 16/9; border-radius: 6px; overflow: hidden;
+      border: 1px solid var(--border); background: var(--surface);
+    }
+    .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-embed .video-placeholder {
+      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 0.6rem; color: var(--text-3); font-family: var(--font-mono); font-size: 0.75rem;
+    }
+    .play-icon { width: 2.6rem; height: 2.6rem; color: var(--accent); }
+
+    blockquote {
+      border-left: 2px solid var(--accent); padding-left: 1.2rem; margin: 2rem 0;
+      color: var(--text); font-size: 1.05rem;
+    }
+
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; }
+    .footer-content {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; max-width: 760px; margin: 0 auto; padding: 0 1.5rem;
+    }
+    footer p { color: var(--text-3); font-size: 0.8rem; }
+    .footer-sites { display: flex; gap: 1.5rem; font-family: var(--font-mono); font-size: 0.78rem; }
+    .footer-sites a { color: var(--text-2); text-decoration: none; }
+    .footer-sites a:hover { color: var(--accent); }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav-row">
+      <a class="logo" href="../index.html"><span class="mark">▸</span> MEMENTO<span class="sep">/</span><span class="site">JOURNAL</span></a>
+      <a class="back-link" href="../index.html">← All posts</a>
+    </div>
+  </header>
+
+  <main class="prose">
+    <article>
+      <div class="post-meta">2026-08-10 · 6 min read · Security</div>
+      <h1>Zero Trust for a 12-Person Office: What Actually Matters</h1>
+
+      <p>"Zero trust" gets pitched to small businesses the same way it's pitched to banks — full identity mesh, micro-segmented networks, continuous device attestation. Most of that is built for a threat model a 12-person office doesn't have. Here's the short list of controls we actually deploy first, in order, and why the rest can wait.</p>
+
+      <h2>1. Kill standing admin access</h2>
+      <p>The single highest-leverage change is almost always the most boring one: nobody has a permanently privileged account. Admin rights get requested, time-boxed, and logged — not assigned once and forgotten. On Azure AD this is Privileged Identity Management; on smaller stacks, it's a documented break-glass process. Either way, this alone closes the door that most opportunistic breaches walk through.</p>
+
+      <h2>2. Device posture before network trust</h2>
+      <p>Instead of a flat "on the office Wi-Fi = trusted" model, access should depend on whether the <em>device</em> is compliant — patched, encrypted, managed — not which network cable it's plugged into. This is the actual core of zero trust, and it's achievable with a conditional access policy and an MDM enrollment, not a six-figure platform.</p>
+
+      <figure>
+        <div class="img-placeholder">
+          <span>figure — replace with a real screenshot or photo</span>
+          <span>e.g. conditional access policy screen, office network diagram</span>
+        </div>
+        <figcaption>fig. 01 — image placeholder pattern for blog posts</figcaption>
+      </figure>
+
+      <h2>3. Segment the one thing that matters</h2>
+      <p>Full micro-segmentation isn't worth the operational overhead at this scale. What is worth it: putting whatever holds customer data or financial records on its own VLAN, away from the printer, the guest network, and everyone's personal laptop. One boundary, drawn around the thing that actually matters, beats twenty boundaries nobody maintains.</p>
+
+      <h2>4. Log enough to answer "what happened"</h2>
+      <p>Not SIEM-grade correlation — just enough centralized logging (auth events, admin actions, endpoint alerts) that when something does go wrong, the answer isn't "we don't know." This is the control most SMBs skip and most regret skipping.</p>
+
+      <blockquote>Zero trust isn't a product you buy. It's the assumption that the network perimeter was never the thing protecting you — and building access decisions around identity and device state instead.</blockquote>
+
+      <h2>What can wait</h2>
+      <p>Continuous risk scoring, full SASE rollouts, and per-application micro-segmentation are real tools — for organizations with the headcount to run them. At 12 people, they add operational drag without a matching increase in security, and they're usually where "zero trust" projects stall out entirely. Get the four controls above right first.</p>
+
+      <h2>Walkthrough</h2>
+      <p>We recorded a short walkthrough of setting up conditional access policies end-to-end for a small Microsoft 365 tenant:</p>
+
+      <div class="video-embed">
+        <!-- Replace VIDEO_ID and uncomment to embed:
+        <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="Video title" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        -->
+        <div class="video-placeholder">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M10 8.5 16 12l-6 3.5z" fill="currentColor" stroke="none"/></svg>
+          <span>embed placeholder — youtube-nocookie.com iframe pattern in source</span>
+        </div>
+      </div>
+
+      <p style="margin-top:2.2rem">Questions about your own setup? <a href="mailto:service@mmnto.sk">service@mmnto.sk</a>.</p>
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Memento s.r.o.</p>
+      <div class="footer-sites">
+        <a href="https://mmnto.sk">mmnto.sk</a>
+        <a href="https://dashshare.mmnto.sk">dashshare.mmnto.sk</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

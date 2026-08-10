@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memento Journal — Notes on IT, security & infrastructure</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0e13;
+      --surface: #10151d;
+      --surface-2: #161c26;
+      --border: #1c232e;
+      --text: #e9edf2;
+      --text-2: #7c8a9c;
+      --text-3: #4d5866;
+      --accent: #e8a355;
+      --accent-2: #58bfae;
+      --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+      --font-body: -apple-system, "Segoe UI", system-ui, Roboto, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+    }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+
+    a { color: inherit; }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 0;
+      position: sticky;
+      top: 0;
+      background: rgba(10, 14, 19, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .nav-row { display: flex; justify-content: space-between; align-items: baseline; }
+    .logo {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.98rem;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+    .logo .mark { color: var(--accent); }
+    .logo .sep { color: var(--text-3); margin: 0 0.4rem; font-weight: 400; }
+    .logo .site { color: var(--text-2); font-weight: 600; }
+    .home-link { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-2); text-decoration: none; }
+    .home-link:hover { color: var(--accent); }
+
+    .intro { padding: 3.5rem 0 2.5rem; }
+    .eyebrow {
+      font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent-2); font-weight: 600;
+      margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .eyebrow::before { content: "//"; color: var(--text-3); }
+    .intro h1 { font-size: clamp(1.9rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.9rem; }
+    .intro p { color: var(--text-2); font-size: 1.02rem; max-width: 58ch; }
+
+    .post-list { list-style: none; padding-bottom: 4rem; }
+    .post-card {
+      display: block; padding: 1.5rem 0; border-top: 1px solid var(--border);
+      text-decoration: none; color: inherit;
+    }
+    .post-list li:last-child .post-card { border-bottom: 1px solid var(--border); }
+    .post-meta {
+      font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-2);
+      margin-bottom: 0.6rem; letter-spacing: 0.02em;
+    }
+    .post-card h2 {
+      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.6rem;
+      transition: color 0.15s ease;
+    }
+    .post-card:hover h2 { color: var(--accent); }
+    .post-card p { color: var(--text-2); font-size: 0.95rem; max-width: 62ch; }
+
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; }
+    .footer-content {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; max-width: 760px; margin: 0 auto; padding: 0 1.5rem;
+    }
+    footer p { color: var(--text-3); font-size: 0.8rem; }
+    .footer-sites { display: flex; gap: 1.5rem; font-family: var(--font-mono); font-size: 0.78rem; }
+    .footer-sites a { color: var(--text-2); text-decoration: none; }
+    .footer-sites a:hover { color: var(--accent); }
+
+    @media (max-width: 560px) {
+      .intro { padding: 2.5rem 0 2rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav-row">
+      <a class="logo" href="index.html"><span class="mark">▸</span> MEMENTO<span class="sep">/</span><span class="site">JOURNAL</span></a>
+      <a class="home-link" href="https://mmnto.sk">mmnto.sk ↗</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <div class="eyebrow">Notes from Memento</div>
+      <h1>Field notes on IT, security & infrastructure</h1>
+      <p>Short, practical write-ups from real engagements — what we deploy, what we skip, and why. No syndicated listicles.</p>
+    </section>
+
+    <ul class="post-list">
+      <li>
+        <a class="post-card" href="posts/zero-trust-smb-office.html">
+          <div class="post-meta">2026-08-10 · 6 min read</div>
+          <h2>Zero Trust for a 12-Person Office: What Actually Matters</h2>
+          <p>Most SMB "zero trust" pitches are enterprise theatre. Here's the four controls we deploy first, and why the rest can wait.</p>
+        </a>
+      </li>
+    </ul>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Memento s.r.o.</p>
+      <div class="footer-sites">
+        <a href="https://mmnto.sk">mmnto.sk</a>
+        <a href="https://dashshare.mmnto.sk">dashshare.mmnto.sk</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
